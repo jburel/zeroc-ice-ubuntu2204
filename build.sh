@@ -6,10 +6,17 @@ ICE_VERSION=${1:-"3.6.5"}
 BUILD=${BRANCH_NAME:-dev}
 TARGET_NAME=ice-$ICE_VERSION-$BUILD
 
+export CPPFLAGS="-Wno-deprecated-declarations -Wno-unused-result -Wno-register"
+export CFLAGS=-"Wno-deprecated"
+
 # Build ice cpp from source
 wget -q https://github.com/zeroc-ice/ice/archive/v$ICE_VERSION.tar.gz
 tar xzf v$ICE_VERSION.tar.gz
 cd ice-$ICE_VERSION/cpp
+patch -u src/IceUtil/Thread.cpp -i /patch
+
+# Apply patch
+
 
 make --silent prefix=/opt/$TARGET_NAME
 make install --silent prefix=/opt/$TARGET_NAME
