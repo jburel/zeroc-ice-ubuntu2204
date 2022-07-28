@@ -28,6 +28,9 @@ tar -zcf /dist/$TARGET_NAME-ubuntu2204-amd64.tar.gz -C /opt $TARGET_NAME
 pip3 download "zeroc-ice==$ICE_VERSION"
 tar -zxf "zeroc-ice-$ICE_VERSION.tar.gz"
 cd "zeroc-ice-$ICE_VERSION"
+ls
 python3 setup.py bdist_wheel
 
 cp dist/* /dist/
+# rename so it is in the list of supported for pip
+mv /dist/zeroc_ice-3.6.5-cp310-cp310-linux_x86_64.whl /dist/zeroc_ice-3.6.5-cp310-cp310-linux_aarch64.whl
